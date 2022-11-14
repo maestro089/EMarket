@@ -1,0 +1,188 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>eMarket</Name>
+    <RootNamespace>eMarket</RootNamespace>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
+    <TestFramework>Pytest</TestFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>138fa3e2-e9c0-4272-8d09-56e3886b62c6</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <DjangoSettingsModule>eMarket.settings</DjangoSettingsModule>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="accounts\admin.py" />
+    <Compile Include="accounts\apps.py" />
+    <Compile Include="accounts\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="accounts\migrations\__init__.py" />
+    <Compile Include="accounts\models.py" />
+    <Compile Include="accounts\tests.py" />
+    <Compile Include="accounts\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="accounts\views.py" />
+    <Compile Include="accounts\__init__.py" />
+    <Compile Include="cart\admin.py" />
+    <Compile Include="cart\apps.py" />
+    <Compile Include="cart\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="cart\migrations\__init__.py" />
+    <Compile Include="cart\models.py" />
+    <Compile Include="cart\tests.py" />
+    <Compile Include="cart\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="cart\views.py" />
+    <Compile Include="cart\__init__.py" />
+    <Compile Include="favourites\admin.py" />
+    <Compile Include="favourites\apps.py" />
+    <Compile Include="favourites\migrations\__init__.py" />
+    <Compile Include="favourites\models.py" />
+    <Compile Include="favourites\tests.py" />
+    <Compile Include="favourites\views.py" />
+    <Compile Include="favourites\__init__.py" />
+    <Compile Include="main\admin.py" />
+    <Compile Include="main\apps.py" />
+    <Compile Include="main\migrations\__init__.py" />
+    <Compile Include="main\models.py" />
+    <Compile Include="main\tests.py" />
+    <Compile Include="main\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main\views.py" />
+    <Compile Include="main\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="eMarket\__init__.py" />
+    <Compile Include="eMarket\settings.py" />
+    <Compile Include="eMarket\urls.py" />
+    <Compile Include="eMarket\wsgi.py" />
+    <Compile Include="news\admin.py" />
+    <Compile Include="news\apps.py" />
+    <Compile Include="news\migrations\__init__.py" />
+    <Compile Include="news\models.py" />
+    <Compile Include="news\tests.py" />
+    <Compile Include="news\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="news\views.py" />
+    <Compile Include="news\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="accounts\templates\register\login.html" />
+    <Content Include="accounts\templates\register\register.html" />
+    <Content Include="cart\templates\add_cart.html" />
+    <Content Include="cart\templates\cart\cart_view.html" />
+    <Content Include="cart\templates\cart\place_order.html" />
+    <Content Include="cart\templates\delete_cart.html" />
+    <Content Include="main\templates\main\ad.html" />
+    <Content Include="main\templates\base.html" />
+    <Content Include="main\templates\main\home.html" />
+    <Content Include="main\templates\main\index.html" />
+    <Content Include="cart\templates\Order.html" />
+    <Content Include="main\templates\main\Profile.html" />
+    <Content Include="main\templates\search.html" />
+    <Content Include="media\photo\author\2022\07\22\Kiprensky_Pushkin.jpg" />
+    <Content Include="media\photo\book\2022\07\22\2925930.jpg" />
+    <Content Include="news\templates\new\index.html" />
+    <Content Include="news\templates\news_card.html" />
+    <Content Include="requirements.txt" />
+    <Content Include="main\templates\book_card.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="accounts\" />
+    <Folder Include="accounts\migrations\" />
+    <Folder Include="accounts\templates\" />
+    <Folder Include="accounts\templates\register\" />
+    <Folder Include="cart\" />
+    <Folder Include="cart\" />
+    <Folder Include="cart\migrations\" />
+    <Folder Include="cart\templates\" />
+    <Folder Include="cart\templates\cart\" />
+    <Folder Include="eMarket\" />
+    <Folder Include="favourites\" />
+    <Folder Include="favourites\migrations\" />
+    <Folder Include="main\" />
+    <Folder Include="main\migrations\" />
+    <Folder Include="main\static\" />
+    <Folder Include="main\static\img\" />
+    <Folder Include="main\templates\" />
+    <Folder Include="main\templates\main\" />
+    <Folder Include="media\" />
+    <Folder Include="media\photo\" />
+    <Folder Include="media\photo\author\" />
+    <Folder Include="media\photo\author\2022\" />
+    <Folder Include="media\photo\author\2022\07\" />
+    <Folder Include="media\photo\author\2022\07\22\" />
+    <Folder Include="media\photo\book\" />
+    <Folder Include="media\photo\book\2022\" />
+    <Folder Include="media\photo\book\2022\07\" />
+    <Folder Include="media\photo\book\2022\07\22\" />
+    <Folder Include="news\" />
+    <Folder Include="news\migrations\" />
+    <Folder Include="news\templates\" />
+    <Folder Include="news\templates\new\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+<h1>{{user}}</h1>
+{% for moder in moder %}
+    {% if moder.moderator %}
+        <a class="nav-link px-2 link-secondary" href="{% url 'home' %}">Home</a>  
+    {% endif %}
+{% endfor %}
+{% endblock %}  

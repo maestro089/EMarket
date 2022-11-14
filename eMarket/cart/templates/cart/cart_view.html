@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Cart{% endblock title %}
+{% block content %}
+    {% for cart_book in cart_book %}
+        <p>{{cart_book.title_book}}</p>
+        {% include 'delete_cart.html' %}
+    {% endfor %}
+<p>{{price}}</p>
+<form action="{% url 'cart:place_order' %}?book_price={{ price }}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">
+        Place order
+    </button>
+</form>
+{% endblock %}

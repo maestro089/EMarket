@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Order{% endblock title %}
+{% block content %}
+
+{% for ord in orders %}
+<p>{{ord.id}}</p>
+    {% for book in books %}
+        {% if book.order == ord %}
+<p>{{book}}</p>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+{% endblock %}

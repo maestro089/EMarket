@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for ad in ad %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col col-lg-3">
+            <img class="d-block w-100 border border-5" src="media/{{ad.photo}}">
+        </div>
+        <div class="col position-static">
+            <div class=" w-auto">
+                <ul class="list-group list-group-flush ">
+                    <li class="list-group-item">Title: {{ad.title}}</li>
+                    <li class="list-group-item">Author: {{ad.Author}}</li>
+                    <li class="list-group-item">Price: {{ad.price}}</li>
+                    <li class="list-group-item">ID book: {{ad.pk}}</li>
+                    <li class="list-group-item">isbn: {{ad.isbn}}</li>
+                    <li class="list-group-item">{{ad.description}}</li>
+                    <li class="list-group-item">
+                        {% if request.user.is_authenticated %}
+                        <form class="btn-group" style="margin:1% 0 0 0" method="get" name="">
+                            {% include 'add_cart.html'%}
+                        </form>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+    {% endblock %}
