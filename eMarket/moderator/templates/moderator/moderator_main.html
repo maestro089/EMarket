@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Moderator{% endblock title %}
+
+{% block content %}
+
+    {% for book in books %}
+        <p>{{book}}</p>
+        <br />
+    {% endfor %}
+{% endblock %} 

@@ -1,0 +1,5 @@
+<form  action="{% url 'mod:add_comment' %}?book_id={{ ad.pk }}&next={{ request.path }}"  method="GET">
+    {% csrf_token %}
+    <textarea name="text_comment"></textarea>
+    <button type="submit">Comment</button>
+</form>

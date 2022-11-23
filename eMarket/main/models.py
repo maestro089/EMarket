@@ -41,5 +41,12 @@ class profile (models.Model):
     objects = None
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     moderator = models.BooleanField(default=False, verbose_name = "moderator")
+    photo = models.ImageField(upload_to="photo/user/%Y/%m/%d/", null = True, verbose_name = "User photo")
+
+class comment_book(models.Model):
+        object = None
+        text = models.TextField(blank=True, verbose_name = "Text")
+        author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='author')
+        book_in_comment = models.ForeignKey(book, on_delete=models.CASCADE, verbose_name='Book')
 
 

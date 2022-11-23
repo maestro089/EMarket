@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}Store{% endblock title %}
 {% block content %}
+
+<div class="container mt-2 border bg-light rounded">
+    {% include "filter.html"  %}
+</div>
+<br />
+
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-{% for ad in ad %}
-    {% include 'book_card.html' %}
-{% endfor %}
+{% if ad %}
+    <div class="col-10 row">
+        {% for ad in ad %}
+            {% include 'book_card.html' %}
+        {% endfor %}
+    </div>
+{% else %}
+    <h1>Book is not search:(</h1>
+{% endif %}
 </div>
 {% endblock %}

@@ -79,6 +79,16 @@
     <Compile Include="eMarket\settings.py" />
     <Compile Include="eMarket\urls.py" />
     <Compile Include="eMarket\wsgi.py" />
+    <Compile Include="moderator\admin.py" />
+    <Compile Include="moderator\apps.py" />
+    <Compile Include="moderator\migrations\__init__.py" />
+    <Compile Include="moderator\models.py" />
+    <Compile Include="moderator\tests.py" />
+    <Compile Include="moderator\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="moderator\views.py" />
+    <Compile Include="moderator\__init__.py" />
     <Compile Include="news\admin.py" />
     <Compile Include="news\apps.py" />
     <Compile Include="news\migrations\__init__.py" />
@@ -97,8 +107,10 @@
     <Content Include="cart\templates\cart\cart_view.html" />
     <Content Include="cart\templates\cart\place_order.html" />
     <Content Include="cart\templates\delete_cart.html" />
+    <Content Include="main\templates\filter.html" />
     <Content Include="main\templates\main\ad.html" />
     <Content Include="main\templates\base.html" />
+    <Content Include="main\templates\comments.html" />
     <Content Include="main\templates\main\home.html" />
     <Content Include="main\templates\main\index.html" />
     <Content Include="cart\templates\Order.html" />
@@ -106,6 +118,8 @@
     <Content Include="main\templates\search.html" />
     <Content Include="media\photo\author\2022\07\22\Kiprensky_Pushkin.jpg" />
     <Content Include="media\photo\book\2022\07\22\2925930.jpg" />
+    <Content Include="media\photo\no-photo.png" />
+    <Content Include="moderator\templates\moderator\moderator_main.html" />
     <Content Include="news\templates\new\index.html" />
     <Content Include="news\templates\news_card.html" />
     <Content Include="requirements.txt" />
@@ -140,6 +154,10 @@
     <Folder Include="media\photo\book\2022\" />
     <Folder Include="media\photo\book\2022\07\" />
     <Folder Include="media\photo\book\2022\07\22\" />
+    <Folder Include="moderator\" />
+    <Folder Include="moderator\migrations\" />
+    <Folder Include="moderator\templates\" />
+    <Folder Include="moderator\templates\moderator\" />
     <Folder Include="news\" />
     <Folder Include="news\migrations\" />
     <Folder Include="news\templates\" />

@@ -1,8 +1,9 @@
+from asyncio.windows_events import NULL
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from .models import the_cart,Order,BookInOrder
-from main.models import book
+from main.models import book, genre_of_the_book,Author_of_the_book,profile
 from .forms import *
 
 
@@ -29,12 +30,13 @@ def add_cart(request):
     path = request.GET.get('next')
     
     if request.method == 'POST':
+        if request.POST.get('quentity_book'):
 
-        the_cart.objects.create(title_book = book.objects.get(id = request.GET.get('ad_id')),
-                                customer = request.user, 
-                                quentity = request.POST.get('quentity_book')
-                                )
-        return redirect(path)
+            the_cart.objects.create(title_book = book.objects.get(id = request.GET.get('ad_id')),
+                                    customer = request.user, 
+                                    quentity = request.POST.get('quentity_book')
+                                    )
+    return redirect(path)
 
 def delete_cart(request):
     path = request.GET.get('next')
@@ -79,12 +81,14 @@ def place_order(request):
 
 def search(request):
     query_search = request.GET.get('search', '')
+    genre = genre_of_the_book.objects.all()
     if query_search:
         ad = book.objects.filter(title__icontains = query_search)
     else:
         ad = book.objects.all()
     context ={
         'ad':ad,
+        'genre':genre,
         }
     return render(request,'main/index.html',context = context)
 
@@ -97,4 +101,29 @@ def order(request):
         }
     return render(request,'Order.html',context = context)
 
+def filter_book(request):
+    genre = genre_of_the_book.objects.all()
+
+
+    if request.method == "GET":
+        path = request.path
+        ad = book.objects.all()
+        if request.GET.get("genre") !="All":
+            if request.GET.get("genre"):
+                g = genre_of_the_book.objects.get(title = request.GET.get("genre"))
+                ad = ad.filter(genre = g.id)
+        if request.GET.get("author_name"):
+            a = Author_of_the_book.objects.get(name__icontains = request.GET.get("author_name"))
+            ad = ad.filter(Author = a.id)
+        if request.GET.get("price_min"):
+            ad = ad.filter(price__gte = request.GET.get("price_min"))
+        if request.GET.get("price_max"):
+            ad = ad.filter(price__lte = request.GET.get("price_max"))
+
+    context ={
+        'ad':ad,
+        'genre':genre,
+        }
+
+    return render(request,'main/index.html',context=context)
 

@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from . import views 
 
 
@@ -7,4 +7,5 @@ urlpatterns = [
     path('profile', views.profile_user, name='profile'),
     path('store', views.index, name='store'),
     path('ad/<int:ad_id>', views.ad_info, name='ad_info'),
+    
 ]

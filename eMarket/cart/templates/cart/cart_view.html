@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
 {% block title %}Cart{% endblock title %}
 {% block content %}
+<ol class="list-group">
     {% for cart_book in cart_book %}
-        <p>{{cart_book.title_book}}</p>
-        {% include 'delete_cart.html' %}
+    <li class="list-group-item">
+        <div class=" row  mt-3">
+            <img class="col-2" src="../../media/{{cart_book.title_book.photo}}" />
+            <div class="col-2">
+                <p><b>Name:{{cart_book.title_book}}</b></p>
+                <p>Author:{{cart_book.title_book.Author}}</p>
+                <p>Quantity:{{cart_book.quentity}}</p>
+                <br />
+                {% include 'delete_cart.html' %}
+            </div>
+        </div>
+        
+    </li>
     {% endfor %}
+</ol>
 <p>{{price}}</p>
 <form action="{% url 'cart:place_order' %}?book_price={{ price }}" method="post">
     {% csrf_token %}

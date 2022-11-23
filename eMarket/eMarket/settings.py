@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'cart.apps.CartConfig',
     'news.apps.NewsConfig',
+    'moderator.apps.ModeratorConfig'
 ]
 
 # Middleware framework

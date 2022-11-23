@@ -4,7 +4,7 @@
 <h1>{{user}}</h1>
 {% for moder in moder %}
     {% if moder.moderator %}
-        <a class="nav-link px-2 link-secondary" href="{% url 'home' %}">Home</a>  
+       <div> <a class="nav-link px-2 link-secondary" href="{% url 'moderator' %}">moderator</a></div>
     {% endif %}
 {% endfor %}
 {% endblock %}  
