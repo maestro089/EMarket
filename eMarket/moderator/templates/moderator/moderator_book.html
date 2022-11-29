@@ -1,0 +1,32 @@
+﻿{% extends 'base.html' %}
+{% block title %}Страница администратора{% endblock title %}
+
+{% block content %}
+    {% include 'menu_moderator.html'%}
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Автор</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">isbn</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ad in books %}
+                <tr>
+                    <th scope="row">{{ad.pk}}</th>
+                    <td>{{ad.title}}</td>
+                    <td>{{ad.Author}}</td>
+                    <td>{{ad.price}}</td>
+                    <td>{{ad.isbn}}</td>
+                    <td>{% include 'moderator/delete.html'%}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %} 

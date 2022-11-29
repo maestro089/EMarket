@@ -111,6 +111,7 @@
     <Content Include="main\templates\main\ad.html" />
     <Content Include="main\templates\base.html" />
     <Content Include="main\templates\comments.html" />
+    <Content Include="main\templates\main\author.html" />
     <Content Include="main\templates\main\home.html" />
     <Content Include="main\templates\main\index.html" />
     <Content Include="cart\templates\Order.html" />
@@ -119,6 +120,11 @@
     <Content Include="media\photo\author\2022\07\22\Kiprensky_Pushkin.jpg" />
     <Content Include="media\photo\book\2022\07\22\2925930.jpg" />
     <Content Include="media\photo\no-photo.png" />
+    <Content Include="moderator\templates\menu_moderator.html" />
+    <Content Include="moderator\templates\moderator\add_menejer.html" />
+    <Content Include="moderator\templates\moderator\delete.html" />
+    <Content Include="moderator\templates\moderator\delete_user.html" />
+    <Content Include="moderator\templates\moderator\moderator_book.html" />
     <Content Include="moderator\templates\moderator\moderator_main.html" />
     <Content Include="news\templates\new\index.html" />
     <Content Include="news\templates\news_card.html" />

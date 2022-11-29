@@ -1,10 +1,40 @@
-{% extends 'base.html' %}
-{% block title %}Moderator{% endblock title %}
+﻿{% extends 'base.html' %}
+{% block title %}Страница администратора{% endblock title %}
 
 {% block content %}
-
-    {% for book in books %}
-        <p>{{book}}</p>
-        <br />
-    {% endfor %}
+    {% include 'menu_moderator.html'%}
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Менеджер</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in user %}
+                <tr>
+                    <th scope="row">{{user.pk}}</th>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.username}}</td>
+                    {% for ad in profile %}
+                        {% if ad.user == user %}
+                            {% if ad.moderator %}
+                                <td>{% include 'moderator/delete.html'%}</td>
+                            {% else %}
+                                <td>{% include 'moderator/add_menejer.html'%}</td>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <td>{% include 'moderator/delete_user.html'%}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %} 

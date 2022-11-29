@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 
 from .forms import *
 from .models import *
-
+from main.models import profile
 
 
 class register( CreateView ):
@@ -19,6 +19,7 @@ class register( CreateView ):
         return dict(list(context.items()))
 
     def get_success_url(self):
+        profile.objects.create(user = User.objects.last())
         return reverse_lazy('home')
 
 
