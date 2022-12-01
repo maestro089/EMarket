@@ -33,6 +33,9 @@ class book (models.Model):
     Author = models.ForeignKey(Author_of_the_book, null = True, blank = True, verbose_name = "Автор",on_delete = models.CASCADE)
     genre = models.ForeignKey(genre_of_the_book, null = False, blank = True, verbose_name = "Кагория книги",on_delete = models.CASCADE)
 
+    def get_absolute_url(self):
+        return f'/ad/{self.id}'
+
 
     def __str__(self):
         return self.title

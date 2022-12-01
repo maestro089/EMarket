@@ -81,6 +81,9 @@
     <Compile Include="eMarket\wsgi.py" />
     <Compile Include="moderator\admin.py" />
     <Compile Include="moderator\apps.py" />
+    <Compile Include="moderator\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="moderator\migrations\__init__.py" />
     <Compile Include="moderator\models.py" />
     <Compile Include="moderator\tests.py" />
@@ -124,8 +127,12 @@
     <Content Include="moderator\templates\moderator\add_menejer.html" />
     <Content Include="moderator\templates\moderator\delete.html" />
     <Content Include="moderator\templates\moderator\delete_user.html" />
+    <Content Include="moderator\templates\moderator\edit_news_cart.html" />
+    <Content Include="moderator\templates\moderator\edit_book_cart.html" />
+    <Content Include="moderator\templates\moderator\moderator_news.html" />
     <Content Include="moderator\templates\moderator\moderator_book.html" />
     <Content Include="moderator\templates\moderator\moderator_main.html" />
+    <Content Include="news\templates\new\news.html" />
     <Content Include="news\templates\new\index.html" />
     <Content Include="news\templates\news_card.html" />
     <Content Include="requirements.txt" />

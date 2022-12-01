@@ -9,21 +9,17 @@
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">Название</th>
-                    <th scope="col">Автор</th>
-                    <th scope="col">Цена</th>
-                    <th scope="col">isbn</th>
+                    <th scope="col">Дата публикации</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-            {% for ad in books %}
+            {% for ad in news %}
                 <tr>
                     <th scope="row">{{ad.pk}}</th>
                     <td>{{ad.title}}</td>
-                    <td>{{ad.Author}}</td>
-                    <td>{{ad.price}}</td>
-                    <td>{{ad.isbn}}</td>
-                    <td><a href="{% url "moderator:edit_book" ad.id %}">Edit</a></td>
+                    <td>{{ad.time_create}}</td>
+                    <td><a href="{% url "moderator:edit_news" ad.id %}">Edit</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
