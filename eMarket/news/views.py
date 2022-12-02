@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import * 
+from main.models import profile
 
 def index(request):
     ad = news.objects.all()
     context ={
         'ad':ad,
+        'photo_user':profile.objects.filter(user = request.user),
         }
     return render(request,'new/index.html',context = context)
 
@@ -18,7 +20,8 @@ def news_info(request,pk):
 
     context={
         "ad":news_search,
-        "comment":comments
+        "comment":comments,
+        'photo_user':profile.objects.filter(user = request.user),
         }
 
     return render(request,"new/news.html",context = context)

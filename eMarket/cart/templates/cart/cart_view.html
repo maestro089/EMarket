@@ -1,28 +1,31 @@
-{% extends 'base.html' %}
-{% block title %}Cart{% endblock title %}
+﻿{% extends 'base.html' %}
+{% block title %}Корзина{% endblock title %}
 {% block content %}
-<ol class="list-group">
-    {% for cart_book in cart_book %}
-    <li class="list-group-item">
-        <div class=" row  mt-3">
-            <img class="col-2" src="../../media/{{cart_book.title_book.photo}}" />
-            <div class="col-2">
-                <p><b>Name:{{cart_book.title_book}}</b></p>
-                <p>Author:{{cart_book.title_book.Author}}</p>
-                <p>Quantity:{{cart_book.quentity}}</p>
-                <br />
-                {% include 'delete_cart.html' %}
+
+{% if cart_book %}
+    <ol class="list-group">
+
+        {% for cart_book in cart_book %}
+        <li class="list-group-item">
+            <div class=" row  mt-3">
+                <img class="col-2" src="../../media/{{cart_book.title_book.photo}}" />
+                <div class="col-4">
+                    <p><b>Название книги: {{cart_book.title_book}}</b></p>
+                    <p>Автор: {{cart_book.title_book.Author}}</p>
+                    <p>Количество: {{cart_book.quentity}}</p>
+                    <br />
+                    {% include 'delete_cart.html' %}
+                </div>
             </div>
-        </div>
-        
-    </li>
-    {% endfor %}
-</ol>
-<p>{{price}}</p>
-<form action="{% url 'cart:place_order' %}?book_price={{ price }}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-success">
-        Place order
-    </button>
-</form>
+
+        </li>
+        {% endfor %}
+    </ol>
+    <p>{{price}}</p>
+    <a class="btn btn-success" href=" {% url 'cart:place_order' %}">
+        Купить
+    </a>
+{% else %}
+<h1>Корзина пуста</h1>
+{% endif %}
 {% endblock %}

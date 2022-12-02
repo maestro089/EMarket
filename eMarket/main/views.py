@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import * 
+from django.contrib.auth.models import User
 
 def index(request):
     ad = book.objects.all()
     genre = genre_of_the_book.objects.all()
 
     context ={
+        'photo_user':profile.objects.filter(user = request.user),
         'ad':ad,
         'genre':genre,
         }
@@ -23,6 +25,7 @@ def ad_info(request, ad_id):
     context ={
         'ad':ad,
         'comment':comment,
+        'photo_user':profile.objects.filter(user = request.user),
         }
     return render(request,'main/ad.html',context = context)
 
@@ -34,6 +37,7 @@ def home(request):
     context = {
         "books":books,
         "author":author,
+        'photo_user':profile.objects.filter(user = request.user),
         }
 
     return render(request,'main/home.html',context = context)
@@ -42,6 +46,7 @@ def profile_user(request):
     moder = profile.objects.filter(user = request.user)
     context ={
         'moder':moder,
+        'photo_user':profile.objects.filter(user = request.user),
         }
     return render(request,"main/profile.html",context = context)
 

@@ -6,6 +6,7 @@ from django.views.generic import UpdateView
 from main.models import comment_book,profile,book,Author_of_the_book,genre_of_the_book
 from .forms import EditBookForm, EditNewsForm
 from news.models import news
+from cart.models import Order,BookInOrder
 
 
 def moderator_main(request):
@@ -17,7 +18,8 @@ def moderator_main(request):
     context = {
         'books':books,
         'user':user,
-        'profile':profile_user
+        'profile':profile_user,
+        'photo_user':profile.objects.filter(user = request.user),
         }
 
     return render(request,"moderator/moderator_main.html",context = context)
@@ -28,6 +30,7 @@ def moderator_book(request):
 
     context = {
         'books':books,
+        'photo_user':profile.objects.filter(user = request.user),
         }
 
     return render(request,"moderator/moderator_book.html",context = context)
@@ -41,23 +44,20 @@ def delete_user(request):
 
     return redirect(path)
 
-def add_menejer(request):
-    path = request.GET.get('next')
-
-    profile_user = profile.objects.get(user = request.GET.get('profile_id'))
+def add_menejer(request,pk):
+    profile_user = profile.objects.get(id = pk)
     profile_user.moderator = True
     profile_user.save()
 
-    return redirect(path)
+    return redirect('moderator:moderator_main')
 
-def delete_menejer(request):
-    path = request.GET.get('next')
+def delete_menejer(request,pk):
 
-    profile_user = profile.objects.get(user = request.GET.get('profile_id'))
+    profile_user = profile.objects.get(id = pk)
     profile_user.moderator = False
     profile_user.save()
 
-    return redirect(path)
+    return redirect('moderator:moderator_main')
 
 class edit_book(UpdateView):
     model = book
@@ -71,6 +71,7 @@ def moderator_news(request):
 
     context ={
         "news":search_news,
+        'photo_user':profile.objects.filter(user = request.user),
         }
 
     return render(request,"moderator/moderator_news.html",context = context)
@@ -80,6 +81,16 @@ class edit_news(UpdateView):
     template_name = 'moderator/edit_news_cart.html'
 
     form_class = EditNewsForm
+
+def manager_main(request):
+    orders =  reversed(Order.objects.all())
+    books = BookInOrder.objects.all()
+    context = {
+        'orders':orders,
+        'books':books,
+        'photo_user':profile.objects.filter(user = request.user),
+        }
+    return render(request,'manager/index.html',context = context)
 
     
 

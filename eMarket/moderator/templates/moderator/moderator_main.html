@@ -25,9 +25,9 @@
                     {% for ad in profile %}
                         {% if ad.user == user %}
                             {% if ad.moderator %}
-                                <td>{% include 'moderator/delete.html'%}</td>
+                                <td><a href="{% url "moderator:delete_menejer" ad.id %}">Удалить менеджер</a></td>
                             {% else %}
-                                <td>{% include 'moderator/add_menejer.html'%}</td>
+                                <td><a href="{% url "moderator:add_menejer" ad.id %}">Добавить менеджера</a></td>
                             {% endif %}
                         {% endif %}
                     {% endfor %}

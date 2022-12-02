@@ -1,23 +1,26 @@
-﻿{% extends 'base.html' %}
-{% block title %}Заказы{% endblock title %}
+{% extends 'base.html' %}
+{% block title %}Страница менеджера{% endblock title %}
+
 {% block content %}
 <div class="container mt-5">
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">id</th>
+                <th scope="col">Заказчик</th>
                 <th scope="col">Состав заказа</th>
             </tr>
         </thead>
         {% for order in orders %}
-
+        
         <tr>
             <th scope="row"><p>{{order.id}}</p></th>
+            <td><p>{{order.customer}}</p></td>
             <td>
                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample{{order.pk}}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Подробнее</a>
-        </tr>
-        <tr>
-            <td></td>
+
+            </td>
+
             <td>
                 <div class="collapse multi-collapse" id="multiCollapseExample{{order.pk}}">
                     <div class="card card-body">
@@ -42,10 +45,9 @@
                     </div>
                 </div>
             </td>
+
+            {% endfor %}
         </tr>
-
-
-        {% endfor %}
     </table>
 </div>
 {% endblock %}

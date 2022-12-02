@@ -1,4 +1,4 @@
-from asyncio.windows_events import NULL
+﻿from asyncio.windows_events import NULL
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -23,6 +23,7 @@ def view_cart(request):
     context = {
         'cart_book':cart_book,
         'price':price,
+        'photo_user':profile.objects.filter(user = request.user),
         }
     return render(request,'cart/cart_view.html',context = context)
 
@@ -31,11 +32,10 @@ def add_cart(request):
     
     if request.method == 'POST':
         if request.POST.get('quentity_book'):
-
-            the_cart.objects.create(title_book = book.objects.get(id = request.GET.get('ad_id')),
-                                    customer = request.user, 
-                                    quentity = request.POST.get('quentity_book')
-                                    )
+                the_cart.objects.create(title_book = book.objects.get(id = request.GET.get('ad_id')),
+                                        customer = request.user, 
+                                        quentity = request.POST.get('quentity_book')
+                                        )
     return redirect(path)
 
 def delete_cart(request):
@@ -48,36 +48,18 @@ def delete_cart(request):
     return redirect(path)
 
 def place_order(request):
-    form = form_adress()
+    cart = the_cart.objects.filter(customer = request.user)
+    if(len(cart)>0):
+        order = Order.objects.create(customer=request.user)
 
-    if request.method == 'POST':
-        form = form_adress(request.POST)
-        cart = the_cart.objects.filter(customer = request.user)
-        context = {
-            'form':form,
-            }
-        if form.is_valid():
-            #order = form.save(commit = False)
-            #order.customer = request.user
-            #order.save()
-            if(len(cart)>0):
-                order = Order.objects.create(customer=request.user)
-
-                for cart in cart:
-                    product = book.objects.get(pk=cart.title_book.pk)
-                    quantity = cart.quentity
-                    BookInOrder.objects.create(order=order, book=cart.title_book, quantity=quantity)
-
-
-                messages.success(request, 'Order accepted')
-
-            return render(request,'Order.html', context = context) 
-
-            
-    context = {
-     'form':form,
-    }
-    return render(request,'cart/place_order.html', context = context)
+        for cart in cart:
+            product = book.objects.get(pk=cart.title_book.pk)
+            quantity = cart.quentity
+            BookInOrder.objects.create(order=order, book=cart.title_book, quantity=quantity)
+            cart.delete()
+        messages.success(request, 'Заказ оформлен')
+        return render(request,'cart/cart_view.html') 
+    return render(request,'cart/cart_view.html')
 
 def search(request):
     query_search = request.GET.get('search', '')
@@ -89,6 +71,7 @@ def search(request):
     context ={
         'ad':ad,
         'genre':genre,
+        'photo_user':profile.objects.filter(user = request.user),
         }
     return render(request,'main/index.html',context = context)
 
@@ -97,7 +80,8 @@ def order(request):
     books = BookInOrder.objects.all()
     context = {
         'orders':orders,
-        'books':books
+        'books':books,
+        'photo_user':profile.objects.filter(user = request.user),
         }
     return render(request,'Order.html',context = context)
 
@@ -123,6 +107,7 @@ def filter_book(request):
     context ={
         'ad':ad,
         'genre':genre,
+        'photo_user':profile.objects.filter(user = request.user),
         }
 
     return render(request,'main/index.html',context=context)

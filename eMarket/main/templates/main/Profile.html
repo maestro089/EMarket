@@ -15,5 +15,8 @@
         {% if user.is_staff %}
             <div> <a class="nav-link px-2 link-secondary" href="{% url 'moderator:moderator_main' %}">Страница администратора</a></div>
         {% endif %}
+        {% if moder.moderator %}
+            <div> <a class="nav-link px-2 link-secondary" href="{% url 'moderator:manager_main' %}">Страница менеджера</a></div>
+        {% endif %}
     {% endfor %}
 {% endblock %}

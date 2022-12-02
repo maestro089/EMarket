@@ -66,6 +66,9 @@
     <Compile Include="favourites\__init__.py" />
     <Compile Include="main\admin.py" />
     <Compile Include="main\apps.py" />
+    <Compile Include="main\context_processors.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main\migrations\__init__.py" />
     <Compile Include="main\models.py" />
     <Compile Include="main\tests.py" />
@@ -108,7 +111,6 @@
     <Content Include="accounts\templates\register\register.html" />
     <Content Include="cart\templates\add_cart.html" />
     <Content Include="cart\templates\cart\cart_view.html" />
-    <Content Include="cart\templates\cart\place_order.html" />
     <Content Include="cart\templates\delete_cart.html" />
     <Content Include="main\templates\filter.html" />
     <Content Include="main\templates\main\ad.html" />
@@ -123,6 +125,7 @@
     <Content Include="media\photo\author\2022\07\22\Kiprensky_Pushkin.jpg" />
     <Content Include="media\photo\book\2022\07\22\2925930.jpg" />
     <Content Include="media\photo\no-photo.png" />
+    <Content Include="moderator\templates\manager\index.html" />
     <Content Include="moderator\templates\menu_moderator.html" />
     <Content Include="moderator\templates\moderator\add_menejer.html" />
     <Content Include="moderator\templates\moderator\delete.html" />
@@ -171,6 +174,7 @@
     <Folder Include="moderator\migrations\" />
     <Folder Include="moderator\templates\" />
     <Folder Include="moderator\templates\moderator\" />
+    <Folder Include="moderator\templates\manager\" />
     <Folder Include="news\" />
     <Folder Include="news\migrations\" />
     <Folder Include="news\templates\" />

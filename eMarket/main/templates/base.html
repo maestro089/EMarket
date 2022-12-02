@@ -28,7 +28,7 @@
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             {% if photo_user %}
                                 {% for photo_user in photo_user %}
-                                    <img src="media/{{photo_user.photo}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                                    <img src="../../../media/{{photo_user.photo}}" alt="mdo" width="32" height="32" class="rounded-circle">
                                 {% endfor %}
                             {% else %}
                                 <img src="media/photo/no-photo.png" alt="mdo" width="32" height="32" class="rounded-circle">
@@ -62,5 +62,16 @@
         {% block content %}
         {% endblock content %}
     </div>
+
+    {% block footer %}
+    <footer class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2022 Copyright:
+            <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    {% endblock %}
 </body>
 </html>

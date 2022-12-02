@@ -32,6 +32,10 @@ INSTALLED_APPS = [
     'moderator.apps.ModeratorConfig'
 ]
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'main.context_processors.photo_user',
+)
+
 # Middleware framework
 # https://docs.djangoproject.com/en/2.1/topics/http/middleware/
 MIDDLEWARE = [
