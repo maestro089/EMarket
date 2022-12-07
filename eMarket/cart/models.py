@@ -25,7 +25,7 @@ class Order(models.Model):
 
     class Meta:
         verbose_name = 'Order'
-        verbose_name_plural = 'Prders'
+        verbose_name_plural = 'Orders'
 
     def __str__(self):
         return f'{self.books} - {self.created}'

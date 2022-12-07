@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Редактирование профиля{% endblock title %}
+{% block content %}
+
+
+<form method="get">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button type="submit" name="save">Сохранить</button>
+</form>
+
+
+{% endblock %}

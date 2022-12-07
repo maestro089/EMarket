@@ -4,6 +4,8 @@
 {% block content %}
     {% include 'menu_moderator.html'%}
     <div class="container mt-5">
+        
+        <a href="{% url "moderator:create_book"%}">Создать</a>
         <table class="table">
             <thead>
                 <tr>
@@ -23,7 +25,11 @@
                     <td>{{ad.Author}}</td>
                     <td>{{ad.price}}</td>
                     <td>{{ad.isbn}}</td>
-                    <td><a href="{% url "moderator:edit_book" ad.id %}">Edit</a></td>
+                    <td>
+                        <a href="{% url "moderator:edit_book" ad.id %}">Редактировать</a>
+                        <a href="{% url "moderator:delete_book" ad.id %}">Удалить</a>
+                    </td>
+
                 </tr>
                 {% endfor %}
             </tbody>

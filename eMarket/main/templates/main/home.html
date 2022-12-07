@@ -8,35 +8,45 @@
         <hr />
         <div class="row row-cols-1 row-cols-sm-2  g-3">
             {% for ad in books %}
-                {% include 'book_card.html' %}
+            {% include 'book_card.html' %}
             {% endfor %}
         </div>
         <br />
-        <h1 class="text-secondary">Новые авторы</h1>
+
+        <h1 class="text-secondary">Последние новости</h1>
         <hr />
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for ad in author %}
-            <div class="col-3">
-                <div class="card shadow-sm">
-                    <img class="d-block w-100" src="media/{{ad.photo}}">
-                    <div class="card-body">
-                        <h5 class="card-text"><b>{{ad.name}}</b></h5>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <form class="btn-group" method="get" name="">
-                                {% csrf_token %}
-                                <div class="btn-group">
-                                    <a class="btn btn-sm btn-outline-secondary" href="">Читать</a>
-                                </div>
-                            </form>
-                        </div>
+        <div class="row row-cols-1 row-cols-sm-2  g-3">
+            {% for ad in news %}
+            {% include 'news_card.html' %}
+            {% endfor %}
+        </div>
+        <br />
+
+        <!--<h1 class="text-secondary">Новые авторы</h1>
+    <hr />
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for ad in author %}
+        <div class="col-3">
+            <div class="card shadow-sm">
+                <img class="d-block w-100" src="media/{{ad.photo}}">
+                <div class="card-body">
+                    <h5 class="card-text"><b>{{ad.name}}</b></h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <form class="btn-group" method="get" name="">
+                            {% csrf_token %}
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-secondary" href="">Читать</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>-->
+    </div>
+        <div class="col-4">
+            <!--Место для правого меню-->
         </div>
     </div>
-    <div class="col-4">
-        <!--Место для правого меню-->
-    </div>
-</div>
 {% endblock %}

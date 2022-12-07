@@ -117,11 +117,14 @@
     <Content Include="main\templates\base.html" />
     <Content Include="main\templates\comments.html" />
     <Content Include="main\templates\main\author.html" />
+    <Content Include="main\templates\main\contact.html" />
+    <Content Include="main\templates\main\edit_profile.html" />
     <Content Include="main\templates\main\home.html" />
     <Content Include="main\templates\main\index.html" />
     <Content Include="cart\templates\Order.html" />
     <Content Include="main\templates\main\Profile.html" />
     <Content Include="main\templates\search.html" />
+    <Content Include="media\photo\icon.png" />
     <Content Include="media\photo\author\2022\07\22\Kiprensky_Pushkin.jpg" />
     <Content Include="media\photo\book\2022\07\22\2925930.jpg" />
     <Content Include="media\photo\no-photo.png" />

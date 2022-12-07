@@ -4,6 +4,7 @@
 {% block content %}
     {% include 'menu_moderator.html'%}
     <div class="container mt-5">
+        <a href="{% url "moderator:create_news"%}">Создать</a>
         <table class="table">
             <thead>
                 <tr>
@@ -19,7 +20,11 @@
                     <th scope="row">{{ad.pk}}</th>
                     <td>{{ad.title}}</td>
                     <td>{{ad.time_create}}</td>
-                    <td><a href="{% url "moderator:edit_news" ad.id %}">Edit</a></td>
+                    <td>
+                        <a href="{% url "moderator:edit_news" ad.id %}">Редактировать</a>
+                        <a href="{% url "moderator:delete_news" ad.id %}">Удалить</a>
+                    </td>
+
                 </tr>
                 {% endfor %}
             </tbody>

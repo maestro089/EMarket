@@ -20,10 +20,15 @@ def view_cart(request):
 
 
     cart_book = the_cart.objects.filter(customer = request.user)
+
+    if request.user.is_authenticated:
+        photo_user=profile.objects.filter(user = request.user)
+    else:
+        photo_user = ""
     context = {
         'cart_book':cart_book,
         'price':price,
-        'photo_user':profile.objects.filter(user = request.user),
+        'photo_user':photo_user,
         }
     return render(request,'cart/cart_view.html',context = context)
 
@@ -48,6 +53,14 @@ def delete_cart(request):
     return redirect(path)
 
 def place_order(request):
+    if request.user.is_authenticated:
+        photo_user=profile.objects.filter(user = request.user)
+    else:
+        photo_user = ""
+    context = {
+        'photo_user':photo_user,
+        }
+
     cart = the_cart.objects.filter(customer = request.user)
     if(len(cart)>0):
         order = Order.objects.create(customer=request.user)
@@ -58,8 +71,8 @@ def place_order(request):
             BookInOrder.objects.create(order=order, book=cart.title_book, quantity=quantity)
             cart.delete()
         messages.success(request, 'Заказ оформлен')
-        return render(request,'cart/cart_view.html') 
-    return render(request,'cart/cart_view.html')
+        return render(request,'cart/cart_view.html',context = context) 
+    return render(request,'cart/cart_view.html',context = context)
 
 def search(request):
     query_search = request.GET.get('search', '')
@@ -68,20 +81,30 @@ def search(request):
         ad = book.objects.filter(title__icontains = query_search)
     else:
         ad = book.objects.all()
+
+    if request.user.is_authenticated:
+        photo_user=profile.objects.filter(user = request.user)
+    else:
+        photo_user = ""
     context ={
         'ad':ad,
         'genre':genre,
-        'photo_user':profile.objects.filter(user = request.user),
+        'photo_user':photo_user,
         }
     return render(request,'main/index.html',context = context)
 
 def order(request):
     orders =  Order.objects.filter(customer = request.user)
     books = BookInOrder.objects.all()
+
+    if request.user.is_authenticated:
+        photo_user=profile.objects.filter(user = request.user)
+    else:
+        photo_user = ""
     context = {
         'orders':orders,
         'books':books,
-        'photo_user':profile.objects.filter(user = request.user),
+        'photo_user':photo_user,
         }
     return render(request,'Order.html',context = context)
 
@@ -103,11 +126,15 @@ def filter_book(request):
             ad = ad.filter(price__gte = request.GET.get("price_min"))
         if request.GET.get("price_max"):
             ad = ad.filter(price__lte = request.GET.get("price_max"))
+    if request.user.is_authenticated:
+        photo_user=profile.objects.filter(user = request.user)
+    else:
+        photo_user = ""
 
     context ={
         'ad':ad,
         'genre':genre,
-        'photo_user':profile.objects.filter(user = request.user),
+        'photo_user':photo_user,
         }
 
     return render(request,'main/index.html',context=context)
