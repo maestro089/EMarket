@@ -40,7 +40,7 @@
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                             <li><a class="dropdown-item" href=" {% url 'profile' %}">Профиль</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'logout' %}">Выход</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}?next={{ request.path }}">Выход</a></li>
                             <li><a class="dropdown-item" href="{% url 'cart:view_cart' %}">Корзина</a></li>
                             <li><a class="dropdown-item" href="{% url 'cart:order' %}">Заказы</a></li>
                         </ul>
@@ -48,8 +48,8 @@
                     {% else %}
                     <div class="dropdown text-end">
                         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                            <li><a class="nav-link px-2 link-dark" href="{% url 'register' %}">Регистрация</a></li>
-                            <li><a class="nav-link px-2 link-dark" href="{% url 'login' %}">Вход</a></li>
+                            <li><a class="nav-link px-2 link-dark" href="{% url 'register' %}?next={{ request.path }}">Регистрация</a></li>
+                            <li><a class="nav-link px-2 link-dark" href="{% url 'login' %}?next={{ request.path }}">Вход</a></li>
                         </ul>
                     </div>
                     {% endif%}

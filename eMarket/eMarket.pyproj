@@ -39,6 +39,7 @@
     <Compile Include="accounts\migrations\__init__.py" />
     <Compile Include="accounts\models.py" />
     <Compile Include="accounts\tests.py" />
+    <Compile Include="accounts\token.py" />
     <Compile Include="accounts\urls.py">
       <SubType>Code</SubType>
     </Compile>
@@ -109,6 +110,10 @@
   <ItemGroup>
     <Content Include="accounts\templates\register\login.html" />
     <Content Include="accounts\templates\register\register.html" />
+    <Content Include="accounts\templates\register\password_reset.html" />
+    <Content Include="accounts\templates\register\password_reset_complete.html" />
+    <Content Include="accounts\templates\register\password_reset_confirm.html" />
+    <Content Include="accounts\templates\register\password_reset_done.html" />
     <Content Include="cart\templates\add_cart.html" />
     <Content Include="cart\templates\cart\cart_view.html" />
     <Content Include="cart\templates\delete_cart.html" />
@@ -148,6 +153,7 @@
     <Folder Include="accounts\" />
     <Folder Include="accounts\migrations\" />
     <Folder Include="accounts\templates\" />
+    <Folder Include="accounts\templates\registration\" />
     <Folder Include="accounts\templates\register\" />
     <Folder Include="cart\" />
     <Folder Include="cart\" />
