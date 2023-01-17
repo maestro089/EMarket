@@ -47,9 +47,10 @@ class profile (models.Model):
     photo = models.ImageField(upload_to="photo/user/%Y/%m/%d/", null = True, verbose_name = "Фото пользователя")
 
 class comment_book(models.Model):
-        object = None
-        text = models.TextField(blank=True, verbose_name = "Текст комментария")
-        author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор комментария')
-        book_in_comment = models.ForeignKey(book, on_delete=models.CASCADE, verbose_name='Книга')
+    object = None
+    text = models.TextField(blank=True, verbose_name = "Текст комментария")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор комментария')
+    book_in_comment = models.ForeignKey(book, on_delete=models.CASCADE, verbose_name='Книга')
+    is_publishe = models.BooleanField(default=True, verbose_name = "Бубликация комметария")
 
 

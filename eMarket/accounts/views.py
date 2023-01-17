@@ -39,8 +39,11 @@ def LoginUser(request):
 
             user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
             if user:
-                login(request,user)
-                return redirect(request.GET.get('next'))
+                login(request,user) 
+                try:
+                    return redirect(request.GET.get('next'))
+                except:
+                    return redirect('home')
             else:
                 messages.success(request, 'Логин или пароль введен не правильно')
                 return redirect(request.path)

@@ -1,22 +1,24 @@
 ﻿{% extends 'base.html' %}
 {% block title %}Профиль{% endblock title %}
 {% block content %}
-    {% for moder in moder %}
+    {% for profile in profile %}
     <div class="container mt-5">
         <div class="row">
             <div class="col col-lg-3">
-                <img class="d-block w-100 border border-5" src="../../../media/{{moder.photo}}">
+                <img class="d-block w-100 border border-5" src="../../../media/{{profile.photo}}">
             </div>
             <div class="col-5">
-                <h1>{{user}}</h1>
+                <h1>{{profile.user.username}}</h1>
             </div>
         </div>
     </div>
-        {% if user.is_staff %}
-            <div> <a class="nav-link px-2 link-secondary" href="{% url 'moderator:moderator_main' %}">Страница администратора</a></div>
-        {% endif %}
-        {% if moder.moderator %}
-            <div> <a class="nav-link px-2 link-secondary" href="{% url 'moderator:manager_main' %}">Страница менеджера</a></div>
+        {% if profile.user.pk == request.user.pk %}
+            {% if profile.user.is_staff %}
+                <div> <a class="nav-link px-2 link-secondary" href="{% url 'moderator:moderator_main' %}">Страница администратора</a></div>
+            {% endif %}
+            {% if profile.moderator %}
+                <div> <a class="nav-link px-2 link-secondary" href="{% url 'moderator:manager_main' %}">Страница менеджера</a></div>
+            {% endif %}
         {% endif %}
     {% endfor %}
 {% endblock %}

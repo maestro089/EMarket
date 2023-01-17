@@ -1,9 +1,8 @@
-<form  action="{% url 'cart:add_cart' %}?ad_id={{ ad.pk }}&next={{ request.path }}" method="post">
+<form action="{% url 'cart:add_cart' %}?ad_id={{ ad.pk }}&next={{ request.path }}" method="post" id="task-form">
     {% csrf_token %}
 
-    <input type="number" name="quentity_book" style="width:40px" min="1"/>
+    <input type="number" name="quentity_book" style="width:80px" min="1" />
     <button type="submit" class="btn btn-success">
         <i class="bi bi-cart"></i>
     </button>
-
 </form>

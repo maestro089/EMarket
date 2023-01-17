@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Поиск{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-9">
+        <h2 class="text-secondary">Результаты по вашему запросу: {{query_search}}</h2>
+        <hr />
+        <div class="row row-cols-1 row-cols-sm-2  g-3">
+            {% for ad in ad %}
+            {% include 'book_card.html' %}
+            {% endfor %}
+            {% for ad in ad_genre %}
+            {% include 'book_card.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

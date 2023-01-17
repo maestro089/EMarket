@@ -1,12 +1,6 @@
 <form class="row p-3" method="get" action="{% url 'cart:filter_book' %}?next = {{request.path}}">
-    <input class ="col-2" type="text" name=" author_name" />
-    <select class ="col-2" name="genre">
-        <option>All</option>
-        {% for ad in genre %}
-        <option>{{ad.title}}</option>
-        {% endfor %}
-    </select>
-    <input class ="col-1" type="number" min="0" name="price_min" />---
+    <input class ="col-2 ms-1" type="text" name=" author_name" />
+    <input class ="col-1 ms-1" type="number" min="0" name="price_min" />---
     <input class ="col-1" type="number" name="price_max" />
-    <button class="col-1 btn btn-sm btn-outline-secondary" type="submit">Search</button>
+    <button class="col-1 btn btn-sm btn-outline-secondary ms-3" type="submit">Search</button>
 </form>

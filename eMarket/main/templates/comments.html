@@ -1,5 +1,11 @@
-<form  action="{% url 'mod:add_comment' %}?book_id={{ ad.pk }}&next={{ request.path }}"  method="GET">
-    {% csrf_token %}
-    <textarea name="text_comment"></textarea>
-    <button type="submit">Comment</button>
+<form action="{% url 'comments' %}?book_id={{ ad.pk }}&next={{ request.path }}" method="GET">
+	{% csrf_token %}
+	<textarea name="text_comment"></textarea>
+	<button type="submit">Comment</button>
 </form>
+
+{% for comment in comment %}
+<div class="border-bottom p-2 mt-2 w-50 rounded" style="background: #fff;" id="comment">
+	<p>{{comment.text}}</p>
+</div>
+{% endfor %}

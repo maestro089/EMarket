@@ -36,6 +36,7 @@
 
 {% endfor %}
 <hr>
+
 <div class="row">
     <form class="form-outline col-6 mb-3" method="POST">
         {% csrf_token %}
@@ -49,13 +50,13 @@
         </div>
     </form>
     <div>
-
             {% for comment in comment %}
-            <div class="border-bottom p-2 mt-2 w-50 rounded" style="background: #fff;">
-                <p>{{comment.text}}</p>
-            </div>
+                {% if comment.is_publishe %}
+                    <div class="border-bottom p-2 mt-2 w-50 rounded" style="background: #fff;">
+                        <p>{{comment.text}}</p>
+                    </div>
+                {% endif %}
             {% endfor %}
-        
     </div>
 </div>
 {% endblock %}

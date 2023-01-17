@@ -1,0 +1,37 @@
+﻿{% extends 'base.html' %}
+{% block title %}Страница администратора{% endblock title %}
+
+{% block content %}
+    {% include 'menu_moderator.html'%}
+
+<div class="row mt-5">
+    <div class="col-1"></div>
+    <div class="col-5">
+        <h5>Новые комментарии</h5>
+        <ol>
+            {% for comment in comments %}
+                {% if comment.is_publishe %}
+                    <li>{{comment.text}}</li>
+                    <hr />
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="col-5">
+        <h5>Подозрительные комментарии</h5>
+        <ol>
+            {% for comment in comments %}
+                {% if comment.is_publishe == False%}
+                    <a class="dropdown-item" href=" {% url 'profile' comment.author.pk %} ">{{comment.author}}</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'ad_info' comment.book_in_comment.pk %}">{{comment.book_in_comment}}</a>
+                    <div class="row">
+                    <li class="col-8">{{comment.text}}</li>
+                        <div class="col-3">{% include 'delete_comment.html'%}</div>
+                    </div>
+                    <hr />
+                {% endif %}
+            {% endfor %}
+       </ol>
+    </div>
+</div>
+{% endblock %}

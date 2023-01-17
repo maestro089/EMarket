@@ -12,11 +12,14 @@
 <body class="text-center bg-primary">
     {% if messages %}
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
+    <div class="message alert alert-{{ message.tags }}">
         {{ message }}
     </div>
     {% endfor %}
     {% endif %}
+    {% if request.user.is_authenticated %}
+    Вы уже авторизованы
+    {% else %}
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -57,5 +60,24 @@
             </div>
         </div>
     </section>
+    {% endif %}
+
+    <script type="text/javascript">
+        $(document).on('submit', '#task-form', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "home" %}',
+                data:
+                {
+                    task: $("#task").val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function () {
+                    alert('Saved');
+                }
+            })
+        });
+    </script>
 </body>
 </html>

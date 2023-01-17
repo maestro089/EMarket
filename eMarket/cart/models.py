@@ -18,9 +18,17 @@ class user_adress(models.Model):
     num_home = models.CharField(max_length=255, verbose_name = "Number home")
 
 class Order(models.Model):
+    STATUS_CHOICES = (
+        ('processed', 'Обрабатывается'), 
+        ('sent', 'Отправлен'), 
+        ('delivered', 'Доставлен'), 
+    )
     customer = models.ForeignKey(User, related_name='customer',
                                  on_delete=models.CASCADE, verbose_name='Customer')
     books = models.ManyToManyField(book, verbose_name='Books', blank=True, through='BookInOrder')
+    status = models.CharField(max_length=10, 
+                              choices=STATUS_CHOICES, 
+                              default='processed', verbose_name="Статус" )
     created = models.DateTimeField(auto_now_add=True, verbose_name='Create date')
 
     class Meta:

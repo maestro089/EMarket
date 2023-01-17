@@ -21,14 +21,9 @@ def view_cart(request):
 
     cart_book = the_cart.objects.filter(customer = request.user)
 
-    if request.user.is_authenticated:
-        photo_user=profile.objects.filter(user = request.user)
-    else:
-        photo_user = ""
     context = {
         'cart_book':cart_book,
         'price':price,
-        'photo_user':photo_user,
         }
     return render(request,'cart/cart_view.html',context = context)
 
@@ -53,14 +48,6 @@ def delete_cart(request):
     return redirect(path)
 
 def place_order(request):
-    if request.user.is_authenticated:
-        photo_user=profile.objects.filter(user = request.user)
-    else:
-        photo_user = ""
-    context = {
-        'photo_user':photo_user,
-        }
-
     cart = the_cart.objects.filter(customer = request.user)
     if(len(cart)>0):
         order = Order.objects.create(customer=request.user)
@@ -71,27 +58,25 @@ def place_order(request):
             BookInOrder.objects.create(order=order, book=cart.title_book, quantity=quantity)
             cart.delete()
         messages.success(request, 'Заказ оформлен')
-        return render(request,'cart/cart_view.html',context = context) 
-    return render(request,'cart/cart_view.html',context = context)
+        return render(request,'cart/cart_view.html') 
+    return render(request,'cart/cart_view.html')
 
 def search(request):
     query_search = request.GET.get('search', '')
-    genre = genre_of_the_book.objects.all()
-    if query_search:
-        ad = book.objects.filter(title__icontains = query_search)
-    else:
-        ad = book.objects.all()
+    
+    ad = book.objects.filter(title__icontains = query_search)
+    try:
+        genre = genre_of_the_book.objects.get(title__icontains = query_search)
+        ad_genre = book.objects.filter(genre = genre)
+    except:
+        ad_genre = ''
 
-    if request.user.is_authenticated:
-        photo_user=profile.objects.filter(user = request.user)
-    else:
-        photo_user = ""
     context ={
         'ad':ad,
-        'genre':genre,
-        'photo_user':photo_user,
+        'ad_genre':ad_genre,
+        'query_search':query_search
         }
-    return render(request,'main/index.html',context = context)
+    return render(request,'main/seach_result.html',context = context)
 
 def order(request):
     orders =  Order.objects.filter(customer = request.user)
@@ -115,10 +100,6 @@ def filter_book(request):
     if request.method == "GET":
         path = request.path
         ad = book.objects.all()
-        if request.GET.get("genre") !="All":
-            if request.GET.get("genre"):
-                g = genre_of_the_book.objects.get(title = request.GET.get("genre"))
-                ad = ad.filter(genre = g.id)
         if request.GET.get("author_name"):
             a = Author_of_the_book.objects.get(name__icontains = request.GET.get("author_name"))
             ad = ad.filter(Author = a.id)
@@ -126,16 +107,10 @@ def filter_book(request):
             ad = ad.filter(price__gte = request.GET.get("price_min"))
         if request.GET.get("price_max"):
             ad = ad.filter(price__lte = request.GET.get("price_max"))
-    if request.user.is_authenticated:
-        photo_user=profile.objects.filter(user = request.user)
-    else:
-        photo_user = ""
 
     context ={
         'ad':ad,
-        'genre':genre,
-        'photo_user':photo_user,
         }
 
-    return render(request,'main/index.html',context=context)
+    return redirect(request.GET.get('next'))
 

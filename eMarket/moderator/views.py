@@ -89,42 +89,6 @@ def delete_book(request,pk):
 
     return redirect('moderator:moderator_main')
 
-def moderator_news(request):
-
-    search_news = news.objects.all()
-
-    if request.user.is_authenticated:
-        photo_user=profile.objects.filter(user = request.user)
-    else:
-        photo_user = ""
-
-    context ={
-        "news":search_news,
-        'photo_user':photo_user,
-        }
-
-    return render(request,"moderator/moderator_news.html",context = context)
-
-class edit_news(UpdateView):
-    model = news
-    template_name = 'moderator/edit_news_cart.html'
-
-    form_class = EditNewsForm
-
-class create_news(CreateView ):
-    model = news
-    template_name = 'moderator/edit_news_cart.html'
-
-    form_class = EditNewsForm
-
-def delete_news(request,pk):
-
-    b = news.objects.filter(pk = pk)
-    path = request.path
-    b.delete()
-
-    return redirect('moderator:moderator_main')
-
 def manager_main(request):
     orders =  reversed(Order.objects.all())
     books = BookInOrder.objects.all()
@@ -140,6 +104,13 @@ def manager_main(request):
         }
     return render(request,'manager/index.html',context = context)
 
+
+def comment(request):
+    comments = comment_book.objects.all()
+    context ={
+        'comments':comments,
+        }
+    return render(request,'moderator/comment_moderator.html',context = context)
     
 
 
