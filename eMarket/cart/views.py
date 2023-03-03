@@ -2,9 +2,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from .models import the_cart,Order,BookInOrder
+from .models import the_cart,Order,BookInOrder,points_of_issue_adress
 from main.models import book, genre_of_the_book,Author_of_the_book,profile
 from .forms import *
+
 
 
 def view_cart(request):
@@ -50,7 +51,7 @@ def delete_cart(request):
 def place_order(request):
     cart = the_cart.objects.filter(customer = request.user)
     if(len(cart)>0):
-        order = Order.objects.create(customer=request.user)
+        order = Order.objects.create(customer=request.user, adress = points_of_issue_adress.objects.get(pk = request.POST.get('adress')))
 
         for cart in cart:
             product = book.objects.get(pk=cart.title_book.pk)
@@ -114,3 +115,12 @@ def filter_book(request):
 
     return redirect(request.GET.get('next'))
 
+def making_order(request):
+    adress = points_of_issue_adress.objects.all()
+    cart = the_cart.objects.filter(customer = request.user)
+
+    context = {
+        'adress':adress,
+        'cart_book':cart
+        }
+    return render(request,'cart/making_order.html',context = context)

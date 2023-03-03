@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Оформление заказа{% endblock title %}
+{% block content %}
+
+<ol class="list-group">
+    {% for cart_book in cart_book %}
+    <li class="list-group-item mt-3 border border-4">
+        <div class=" row  mt-3">
+            <img class="col-2" src="../../media/{{cart_book.title_book.photo}}" />
+            <div class="col-4">
+                <p><b>Название книги: {{cart_book.title_book}}</b></p>
+                <p>Автор: {{cart_book.title_book.Author}}</p>
+                <p>Количество: {{cart_book.quentity}}</p>
+                <br />
+                {% include 'delete_cart.html' %}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+<form action="{% url 'cart:place_order' %}" method="POST">
+    {% csrf_token %}
+    <select name="adress">
+        {% for adress in adress %}
+        <option value="{{adress.pk}}">{{adress}}</option>
+        {% endfor %}
+    </select>
+    <br />
+    <button class="btn btn-success" type="submit">
+        Заказать
+    </button>
+</form>
+{% endblock %}

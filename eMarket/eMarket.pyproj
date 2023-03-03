@@ -70,6 +70,9 @@
     <Compile Include="main\context_processors.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="main\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main\middleware.py">
       <SubType>Code</SubType>
     </Compile>
@@ -119,6 +122,7 @@
     <Content Include="accounts\templates\register\password_reset_done.html" />
     <Content Include="cart\templates\add_cart.html" />
     <Content Include="cart\templates\cart\cart_view.html" />
+    <Content Include="cart\templates\cart\making_order.html" />
     <Content Include="cart\templates\delete_cart.html" />
     <Content Include="main\templates\delete_comment.html" />
     <Content Include="main\templates\filter.html" />

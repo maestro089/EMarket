@@ -19,15 +19,27 @@
     </div>
     <div class="col-5">
         <h5>Подозрительные комментарии</h5>
-        <ol>
+        <ol class="list-group list-group-flush">
             {% for comment in comments %}
-                {% if comment.is_publishe == False%}
-                    <a class="dropdown-item" href=" {% url 'profile' comment.author.pk %} ">{{comment.author}}</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'ad_info' comment.book_in_comment.pk %}">{{comment.book_in_comment}}</a>
-                    <div class="row">
-                    <li class="col-8">{{comment.text}}</li>
-                        <div class="col-3">{% include 'delete_comment.html'%}</div>
-                    </div>
+                {% if comment.is_publishe == False %}
+                    <li class="list-group-item">
+                        <a class="dropdown-item" href=" {% url 'profile' comment.author.pk %} ">Автор: {{comment.author}}</a>
+                        <a class="dropdown-item" href="{% url 'ad_info' comment.book_in_comment.pk %}">Книга: {{comment.book_in_comment}}</a>
+                        <div >
+                            <p class="dropdown-item">Комментарий: {{comment.text}}</p>
+                            <div class="row">
+                                <div class="col-2">{% include 'delete_comment.html'%}</div>
+                                <div class="col-3">
+                                    <form action="{% url 'public_comment' %}?comment_id={{ comment.pk }}&next={{ request.path }}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-primary">
+                                            Опубликовать
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                     <hr />
                 {% endif %}
             {% endfor %}

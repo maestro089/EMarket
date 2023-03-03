@@ -5,7 +5,11 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col col-lg-3">
+                {% if  profile.photo %}
                 <img class="d-block w-100 border border-5" src="../../../media/{{profile.photo}}">
+                {% else %}
+                <img class="d-block w-100 border border-5" src="../../../media/photo/no-photo.png">
+                {% endif %}
             </div>
             <div class="col-5">
                 <h1>{{profile.user.username}}</h1>

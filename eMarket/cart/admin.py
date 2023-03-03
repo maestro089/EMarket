@@ -1,9 +1,9 @@
 from django.contrib import admin
-from cart.models import the_cart, user_adress,Order, BookInOrder
+from cart.models import the_cart, points_of_issue_adress,Order, BookInOrder
 
 
 admin.site.register(the_cart)
-admin.site.register(user_adress)
+admin.site.register(points_of_issue_adress)
 
 
 class ProductsInOrderInline(admin.TabularInline):

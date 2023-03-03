@@ -5,17 +5,18 @@ from django.contrib.auth.models import User
 
 class the_cart(models.Model):
     object = None
-    title_book = models.ForeignKey(book, on_delete=models.CASCADE, verbose_name='title book')
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='customer')
-    quentity = models.FloatField(verbose_name = "Quantity", null = True)
+    title_book = models.ForeignKey(book, on_delete=models.CASCADE, verbose_name='Книга')
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Покупатель')
+    quentity = models.IntegerField(verbose_name = "Количество", null = True)
 
-class user_adress(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Customer')
-    postal_code = models.FloatField(verbose_name = "Postal code")
-    country = models.CharField(max_length=255, verbose_name = "Country")
-    sity = models.CharField(max_length=255, verbose_name = "Sity")
-    street = models.CharField(max_length=255, verbose_name = "Street")
-    num_home = models.CharField(max_length=255, verbose_name = "Number home")
+class points_of_issue_adress(models.Model):
+    country = models.CharField(max_length=255, verbose_name = "Страна")
+    sity = models.CharField(max_length=255, verbose_name = "Город")
+    street = models.CharField(max_length=255, verbose_name = "Улица")
+    num_home = models.CharField(max_length=255, verbose_name = "Номер дома")
+
+    def __str__(self):
+        return f'{self.sity}, {self.street}, {self.num_home}'
 
 class Order(models.Model):
     STATUS_CHOICES = (
@@ -23,26 +24,27 @@ class Order(models.Model):
         ('sent', 'Отправлен'), 
         ('delivered', 'Доставлен'), 
     )
-    customer = models.ForeignKey(User, related_name='customer',
-                                 on_delete=models.CASCADE, verbose_name='Customer')
-    books = models.ManyToManyField(book, verbose_name='Books', blank=True, through='BookInOrder')
+    customer = models.ForeignKey(User, related_name='Покупатель',
+                                 on_delete=models.CASCADE, verbose_name='Покупатель')
+    books = models.ManyToManyField(book, verbose_name='Книги', blank=True, through='BookInOrder')
     status = models.CharField(max_length=10, 
                               choices=STATUS_CHOICES, 
                               default='processed', verbose_name="Статус" )
-    created = models.DateTimeField(auto_now_add=True, verbose_name='Create date')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата заказа')
+    adress = models.ForeignKey(points_of_issue_adress, on_delete=models.PROTECT, verbose_name='Адресс доставки',null = True)
 
     class Meta:
-        verbose_name = 'Order'
-        verbose_name_plural = 'Orders'
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
 
     def __str__(self):
         return f'{self.books} - {self.created}'
 
     
 class BookInOrder(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Order')
-    book = models.ForeignKey(book, on_delete=models.PROTECT, verbose_name='Book', related_name='count_in_order',)
-    quantity = models.PositiveSmallIntegerField(verbose_name='Quantity book')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Заказ')
+    book = models.ForeignKey(book, on_delete=models.PROTECT, verbose_name='книга')
+    quantity = models.PositiveSmallIntegerField(verbose_name='Количество книг')
 
     def __str__(self):
         return f'{self.book}'

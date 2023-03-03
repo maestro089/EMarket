@@ -121,13 +121,13 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
-
+RECIPIENTS_EMAIL = ['egor-karpov09@bk.ru'] 
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'egor-karpov08@bk.ru'
-EMAIL_HOST_PASSWORD = 'yr797gduuPedRCg6UCpj'
+EMAIL_HOST_USER = 'egor-karpov09@bk.ru'
+EMAIL_HOST_PASSWORD = 'mTbYTjgv2Uk6p0gLpq3e'
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

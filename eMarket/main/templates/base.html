@@ -44,18 +44,18 @@
                     {% if request.user.is_authenticated %}
                     <div class="dropdown text-end">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            {% if request.user_photo.photo %}
-                            <img src="../../../media/{{request.user_photo.photo}}" alt="mdo" width="32" height="32" class="rounded-circle">
-                            {% else %}
-                            <img src="../../media/photo/no-photo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                            {% endif %}
+                            {{request.user.username}}
                         </a>
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                            <li><a class="dropdown-item" href=" {% url 'profile' request.user.pk%} ">Профиль</a></li>
-                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}?next={{ request.path }}">Выход</a></li>
                             <li><a class="dropdown-item" href="{% url 'cart:view_cart' %}">Корзина</a></li>
                             <li><a class="dropdown-item" href="{% url 'cart:order' %}">Заказы</a></li>
+                            {% if request.user.is_staff %}
+                                <li><a class="dropdown-item" href="{% url 'moderator:moderator_main' %}">Страница администратора</a></li>
+                            {% endif %}
+                            {% if request.user_profile.moderator %}
+                                <li><a class="dropdown-item" href="{% url 'moderator:manager_main' %}">Страница менеджера</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                     {% else %}
@@ -68,7 +68,6 @@
                     {% endif%}
                 </div>
             </div>
-
         </div>
     </header>
 

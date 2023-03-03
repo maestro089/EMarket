@@ -1,8 +1,12 @@
 ﻿from django.shortcuts import render, redirect
 from .models import * 
+from .forms import ContactForm
 from django.contrib.auth.models import User
 from django.views.generic import UpdateView, View
 from django.http import HttpResponseRedirect
+from django.core.mail import EmailMessage
+
+from django.conf import settings
 
 bad_words = ['арбуз']
 
@@ -54,9 +58,20 @@ def profile_user(request,pk):
         }
     return render(request,"main/profile.html",context = context)
 
+from django.http import HttpResponse, HttpResponseRedirect
+
+
 def contact(request):
 
-    return render(request,"main/contact.html")
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            email = EmailMessage(form.cleaned_data['subject'], form.cleaned_data['message'], to=['egor-karpov09@bk.ru'])
+            email.send()
+
+
+    form = ContactForm()
+    return render(request,"main/contact.html", {'form': form})
 
 
 class edit_profile(UpdateView):
@@ -75,6 +90,14 @@ def delete_comment(request):
         comment_id = request.GET.get('comment_id')
         find_comment = comment_book.objects.get(id = comment_id)
         find_comment.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def public_comment(request):
+    if request.method == 'POST':
+        comment_id = request.GET.get('comment_id')
+        find_comment = comment_book.objects.get(id = comment_id)
+        find_comment.is_publishe = True
+        find_comment.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 

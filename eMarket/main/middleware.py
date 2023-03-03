@@ -11,7 +11,7 @@ class ProfileMiddleware:
         # Code to be executed for each request before
         # the view (and later middleware) are called.
         if request.user.is_authenticated:
-            request.user_photo = profile.objects.get(user = request.user) 
+            request.user_profile = profile.objects.get(user = request.user) 
         
 
         response = self.get_response(request)

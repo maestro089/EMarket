@@ -1,4 +1,4 @@
-from django.shortcuts import redirect,render
+﻿from django.shortcuts import redirect,render
 from django.contrib.auth.models import User
 from django.views.generic import UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
@@ -10,22 +10,17 @@ from news.models import news
 from cart.models import Order,BookInOrder
 
 
+
 def moderator_main(request):
 
     books = comment_book.objects.all()
     user = User.objects.all()
     profile_user = profile.objects.all()
 
-    if request.user.is_authenticated:
-        photo_user=profile.objects.filter(user = request.user)
-    else:
-        photo_user = ""
-
     context = {
         'books':books,
         'user':user,
-        'profile':profile_user,
-        'photo_user':photo_user,
+        'profile':profile_user
         }
 
     return render(request,"moderator/moderator_main.html",context = context)
@@ -34,14 +29,8 @@ def moderator_book(request):
 
     books = book.objects.all()
 
-    if request.user.is_authenticated:
-        photo_user=profile.objects.filter(user = request.user)
-    else:
-        photo_user = ""
-
     context = {
-        'books':books,
-        'photo_user':photo_user,
+        'books':books
         }
 
     return render(request,"moderator/moderator_book.html",context = context)
@@ -81,6 +70,8 @@ class create_book(CreateView ):
     template_name = 'moderator/edit_book_cart.html'
 
     form_class = EditBookForm
+
+
 def delete_book(request,pk):
 
     b = book.objects.filter(pk = pk)
@@ -90,17 +81,18 @@ def delete_book(request,pk):
     return redirect('moderator:moderator_main')
 
 def manager_main(request):
-    orders =  reversed(Order.objects.all())
-    books = BookInOrder.objects.all()
+    if request.method == 'POST':
+            id = request.GET.get("order_id")
+            order =  Order.objects.get(pk = id)
+            order.status = request.POST.get("status")
+            order.save()
 
-    if request.user.is_authenticated:
-        photo_user=profile.objects.filter(user = request.user)
-    else:
-        photo_user = ""
+
+    orders =  Order.objects.all()
+    books = BookInOrder.objects.all()
     context = {
-        'orders':orders,
-        'books':books,
-        'photo_user':photo_user,
+        'orders':reversed(orders),
+        'books':books
         }
     return render(request,'manager/index.html',context = context)
 
