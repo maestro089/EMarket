@@ -18,9 +18,10 @@
     </li>
     {% endfor %}
 </ol>
+<p class="mt-2"> Нужно выбрать пункт доставки!</p>
 <form action="{% url 'cart:place_order' %}" method="POST">
     {% csrf_token %}
-    <select name="adress">
+    <select name="adress" class="form-select mt-1" aria-label="Default select example">
         {% for adress in adress %}
         <option value="{{adress.pk}}">{{adress}}</option>
         {% endfor %}

@@ -1,6 +1,7 @@
 ﻿from asyncio.windows_events import NULL
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.core.mail import EmailMessage
 
 from .models import the_cart,Order,BookInOrder,points_of_issue_adress
 from main.models import book, genre_of_the_book,Author_of_the_book,profile
@@ -49,6 +50,7 @@ def delete_cart(request):
     return redirect(path)
 
 def place_order(request):
+    list =''
     cart = the_cart.objects.filter(customer = request.user)
     if(len(cart)>0):
         order = Order.objects.create(customer=request.user, adress = points_of_issue_adress.objects.get(pk = request.POST.get('adress')))
@@ -58,6 +60,12 @@ def place_order(request):
             quantity = cart.quentity
             BookInOrder.objects.create(order=order, book=cart.title_book, quantity=quantity)
             cart.delete()
+        for b in BookInOrder.objects.filter(order = order):
+            list = list + str(b.book.title) + " Количество " + str(b.quantity) + "\n"
+        email_body = "Заказчик: "+ str(request.user) + "\n" + list + "\n" + str(order.adress)
+            
+        email = EmailMessage('Заказ от' + str(order.created), email_body,to=['egor-karpov09@bk.ru'])
+        email.send()
         messages.success(request, 'Заказ оформлен')
         return render(request,'cart/cart_view.html') 
     return render(request,'cart/cart_view.html')

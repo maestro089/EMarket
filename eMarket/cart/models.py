@@ -9,6 +9,10 @@ class the_cart(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Покупатель')
     quentity = models.IntegerField(verbose_name = "Количество", null = True)
 
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины пользователей'
+
 class points_of_issue_adress(models.Model):
     country = models.CharField(max_length=255, verbose_name = "Страна")
     sity = models.CharField(max_length=255, verbose_name = "Город")
@@ -17,6 +21,10 @@ class points_of_issue_adress(models.Model):
 
     def __str__(self):
         return f'{self.sity}, {self.street}, {self.num_home}'
+
+    class Meta:
+        verbose_name = 'Пункт выдачи'
+        verbose_name_plural = 'Пункты выдачи'
 
 class Order(models.Model):
     STATUS_CHOICES = (
@@ -48,6 +56,7 @@ class BookInOrder(models.Model):
 
     def __str__(self):
         return f'{self.book}'
+
 
 
 

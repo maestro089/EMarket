@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from django.contrib.auth.models import User
 
 class news (models.Model):
@@ -15,9 +15,17 @@ class news (models.Model):
     def get_absolute_url(self):
         return f'/news/{self.id}'
 
+    class Meta:
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
+
 class comment(models.Model):
         object = None
         text = models.TextField(blank=True, verbose_name = "Text")
         author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='author')
         news = models.ForeignKey(news, on_delete=models.CASCADE, verbose_name='news')
+
+        class Meta:
+            verbose_name = 'Комментарий'
+            verbose_name_plural = 'Комментарии'
 
