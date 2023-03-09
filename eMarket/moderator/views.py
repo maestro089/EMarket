@@ -98,7 +98,7 @@ def manager_main(request):
 
 
 def comment(request):
-    comments = comment_book.objects.all()
+    comments = comment_book.objects.all().order_by("-id")
     context ={
         'comments':comments,
         }

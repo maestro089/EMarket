@@ -73,7 +73,7 @@ def place_order(request):
 def search(request):
     query_search = request.GET.get('search', '')
     
-    ad = book.objects.filter(title__icontains = query_search)
+    ad = book.objects.filter(title = query_search)
     try:
         genre = genre_of_the_book.objects.get(title__icontains = query_search)
         ad_genre = book.objects.filter(genre = genre)
@@ -88,17 +88,12 @@ def search(request):
     return render(request,'main/seach_result.html',context = context)
 
 def order(request):
-    orders =  Order.objects.filter(customer = request.user)
+    orders =  Order.objects.filter(customer = request.user).order_by("-id")
     books = BookInOrder.objects.all()
 
-    if request.user.is_authenticated:
-        photo_user=profile.objects.filter(user = request.user)
-    else:
-        photo_user = ""
     context = {
         'orders':orders,
         'books':books,
-        'photo_user':photo_user,
         }
     return render(request,'Order.html',context = context)
 

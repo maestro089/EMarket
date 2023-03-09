@@ -25,13 +25,16 @@ def ad_info(request, ad_id):
     ad = book.objects.filter(id = ad_id)
     search_book = book.objects.get(id = ad_id)
     comment = comment_book.objects.filter(book_in_comment = ad_id)
+    text = request.POST.get('Text')
+    if str(text).replace(" ", "") == '':
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     if request.method == "POST":
-        for word in request.POST.get('Text').lower().split():
+        for word in text.lower().split():
             if word in bad_words:
                 comment_book.objects.create(is_publishe = False, author = request.user,text = request.POST.get('Text'),book_in_comment=search_book)
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        comment_book.objects.create(author = request.user,text = request.POST.get('Text'),book_in_comment=search_book)
+        comment_book.objects.create(author = request.user,text = text,book_in_comment=search_book)
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
     context ={
@@ -40,11 +43,21 @@ def ad_info(request, ad_id):
         }
     return render(request,'main/ad.html',context = context)
 
-def home(request):
 
+
+def home(request):
+    p = {}
+    select = selection_book.objects.all()
+
+    for s in select:
+        b = book.objects.filter(genre = s.genre).order_by("-id")[0:4]
+        if b:
+            p[s] = b
     context = {
         "books":book.objects.all().order_by("-id")[0:4],
         "author":Author_of_the_book.objects.all().order_by("-id")[0:4],
+        "selection_book":p,
+        "select":select,
         }
 
     return render(request,'main/home.html',context = context)

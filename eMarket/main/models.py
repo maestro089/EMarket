@@ -8,7 +8,7 @@ class genre_of_the_book (models.Model):
     title = models.CharField(max_length=255, blank = True, verbose_name="Название категории")
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
     class Meta:
         verbose_name = 'Жанр книги'
@@ -57,6 +57,9 @@ class profile (models.Model):
     moderator = models.BooleanField(default=False, verbose_name = "Администратор")
     photo = models.ImageField(upload_to="photo/user/%Y/%m/%d/", null = True, verbose_name = "Фото пользователя")
 
+    def __str__(self):
+        return self.user
+
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
@@ -71,5 +74,18 @@ class comment_book(models.Model):
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return self.book_in_comment
+
+class selection_book(models.Model):
+    genre = models.ForeignKey(genre_of_the_book, null = False, blank = True, verbose_name = "Кагория подборки",on_delete = models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Подборка книг'
+        verbose_name_plural = 'Подборки книг'
+
+    def __str__(self):
+        return self.genre.title
 
 

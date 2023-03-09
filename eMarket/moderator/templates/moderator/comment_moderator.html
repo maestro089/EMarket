@@ -11,7 +11,7 @@
         <ol>
             {% for comment in comments %}
                 {% if comment.is_publishe %}
-                    <li>{{comment.text}}</li>
+                    <li><p>{{comment.text}} <div class="col-2">{% include 'delete_comment.html'%}</div></p></li>
                     <hr />
                 {% endif %}
             {% endfor %}

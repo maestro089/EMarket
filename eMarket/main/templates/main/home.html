@@ -13,8 +13,20 @@
         </div>
         <br />
     </div>
-        <div class="col-4">
-            <!--Место для правого меню-->
+        {% for g, book in selection_book.items %}
+        <div class="col-9">
+            <h1 class="text-secondary">Новые {{g}}</h1>
+            <hr />
+            <div class="row row-cols-1 row-cols-sm-2  g-3">
+                {% for ad in book %}
+                    {% include 'book_card.html' %}
+                {% endfor %}
+            </div>
+            <br />
         </div>
+        {% endfor %}
+    <div class="col-4">
+        <!--Место для правого меню-->
     </div>
+</div>
 {% endblock %}
