@@ -12,18 +12,20 @@ from cart.models import Order,BookInOrder
 
 
 def moderator_main(request):
+    if request.user.is_staff:
+        books = comment_book.objects.all()
+        user = User.objects.all()
+        profile_user = profile.objects.all()
 
-    books = comment_book.objects.all()
-    user = User.objects.all()
-    profile_user = profile.objects.all()
+        context = {
+            'books':books,
+            'user':user,
+            'profile':profile_user
+            }
 
-    context = {
-        'books':books,
-        'user':user,
-        'profile':profile_user
-        }
-
-    return render(request,"moderator/moderator_main.html",context = context)
+        return render(request,"moderator/moderator_main.html",context = context)
+    else:
+        return render(request,"found_404.html")
 
 def moderator_book(request):
 
@@ -81,11 +83,14 @@ def delete_book(request,pk):
     return redirect('moderator:moderator_main')
 
 def manager_main(request):
-    if request.method == 'POST':
-            id = request.GET.get("order_id")
-            order =  Order.objects.get(pk = id)
-            order.status = request.POST.get("status")
-            order.save()
+    if request.user_profile.moderator:
+        if request.method == 'POST':
+                id = request.GET.get("order_id")
+                order =  Order.objects.get(pk = id)
+                order.status = request.POST.get("status")
+                order.save()
+    else:
+        return render(request,"found_404.html")
 
 
     orders =  Order.objects.all()

@@ -58,7 +58,7 @@ class profile (models.Model):
     photo = models.ImageField(upload_to="photo/user/%Y/%m/%d/", null = True, verbose_name = "Фото пользователя")
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
     class Meta:
         verbose_name = 'Профиль'

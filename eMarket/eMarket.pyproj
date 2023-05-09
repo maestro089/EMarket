@@ -126,6 +126,7 @@
     <Content Include="cart\templates\delete_cart.html" />
     <Content Include="main\templates\delete_comment.html" />
     <Content Include="main\templates\filter.html" />
+    <Content Include="main\templates\found_404.html" />
     <Content Include="main\templates\main\ad.html" />
     <Content Include="main\templates\base.html" />
     <Content Include="main\templates\comments.html" />
